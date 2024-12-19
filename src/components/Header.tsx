@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useGlobalContext } from "../context/GlobalContext";
+import { useGlobalContext } from "../context/useGlobalContext";
 
 const Header = () => {
   const { count } = useGlobalContext();

@@ -1,15 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { GlobalProvider } from "./context/GlobalContext";
+import { GlobalContextProvider } from "./context/GlobalContextProvider";
 import App from "./App";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <GlobalProvider>
+    <GlobalContextProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </GlobalProvider>
+    </GlobalContextProvider>
   </React.StrictMode>
 );
