@@ -21,9 +21,10 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
   const [date, setDate] = useState<string>("");
 
   useEffect(() => {
-    const eventSource = new EventSource("http://localhost:4000/api/sse");
+    const worker = new SharedWorker("/shared-worker.js");
+    worker.port.start();
 
-    eventSource.onmessage = (event) => {
+    worker.port.onmessage = (event) => {
       const [type, value] = event.data.split("|");
 
       if (type === "date") {
@@ -36,7 +37,8 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
     };
 
     return () => {
-      eventSource.close();
+      worker.port.postMessage("disconnect");
+      worker.port.close();
     };
   }, []);
 
