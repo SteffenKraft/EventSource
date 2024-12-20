@@ -26,7 +26,15 @@ export const GlobalContextProvider = ({
       }
     };
 
+    // Handle tab or window close
+    const handleBeforeUnload = () => {
+      worker.port.postMessage("disconnect");
+      worker.port.close();
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
     return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
       worker.port.postMessage("disconnect");
       worker.port.close();
     };

@@ -27,7 +27,7 @@ func sseHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Send the current date every 2 seconds
+	// Send the current date every seconds
 	go func() {
 		for {
 			fmt.Fprintf(w, "data: date|%s\n\n", time.Now().Format(time.RFC3339))
